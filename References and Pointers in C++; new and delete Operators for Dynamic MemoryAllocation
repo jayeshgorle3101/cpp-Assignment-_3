@@ -1,0 +1,93 @@
+
+#include <iostream>
+using namespace std;
+
+void swapByValue(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+void swapByPointer(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void swapByReference(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
+int main() {
+    int x = 10;
+    int *ptr = &x;
+    int &ref = x;
+
+    cout << "Initial value of x: " << x << endl;
+    cout << "Value using pointer: " << *ptr << endl;
+    cout << "Value using reference: " << ref << endl;
+    cout << "ptr == &x: " << (ptr == &x) << endl;
+    cout << "&ref == &x: " << (&ref == &x) << endl;
+
+    *ptr = 20;
+    cout << "x after pointer modification: " << x << endl;
+
+    ref = 30;
+    cout << "x after reference modification: " << x << endl;
+
+    int p = 5, q = 9;
+
+    cout << "\nBefore call by value: a = " << p
+         << ", b = " << q << endl;
+    swapByValue(p, q);
+    cout << "After call by value: a = " << p
+         << ", b = " << q << endl;
+
+    swapByPointer(&p, &q);
+    cout << "After call by pointer: a = " << p
+         << ", b = " << q << endl;
+
+    swapByReference(p, q);
+    cout << "After call by reference: a = " << p
+         << ", b = " << q << endl;
+
+    int *dynamicNumber = new int(25);
+    cout << "\nDynamic number: " << *dynamicNumber << endl;
+
+    delete dynamicNumber;
+    dynamicNumber = nullptr;
+
+    int n;
+    cout << "\nEnter array size: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Invalid array size." << endl;
+        return 0;
+    }
+
+    int *arr = new int[n];
+    int sum = 0;
+
+    cout << "Enter array elements: ";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+        sum += arr[i];
+    }
+
+    cout << "Array elements: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+
+    cout << "\nSum = " << sum << endl;
+
+    delete[] arr;
+    arr = nullptr;
+
+    cout << "Memory freed successfully." << endl;
+
+    return 0;
+}
